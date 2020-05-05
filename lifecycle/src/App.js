@@ -13,7 +13,7 @@ class App extends Component {
     axios
       .get("https://api.github.com/users/nicholas-myers")
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({
           users: [res.data],
           
@@ -26,19 +26,25 @@ class App extends Component {
       axios
       .get("https://api.github.com/users/nicholas-myers/followers")
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({
           followers: res.data
         })
-        // console.log(this.state.users)
+        // console.log(this.state.followers)
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
+  toggleFollowers = (event) => {
+    event.preventDefault()
+    
+  }
+
   render() {
     console.log("app is rendering");
+    // debugger
     return (
       <div className="App">
         <h1>Git User Cards</h1>
@@ -46,11 +52,11 @@ class App extends Component {
           {this.state.users.map((user) => (
             <div key={user.id} className="user">
               <h2>{user.name}</h2>
-              <img src={user.avatar_url} />
+              <img src={user.avatar_url} alt="profile" />
               <p>{user.bio}</p>
-              <p></p>
+              <button>Followers</button>
               {this.state.followers.map(follower => (
-              <div className="followers">
+              <div key={follower.id} className="followers">
                 <h3>{follower.login}</h3>
               </div>))}
             </div>

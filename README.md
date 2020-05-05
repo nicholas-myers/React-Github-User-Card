@@ -55,14 +55,14 @@ x- You may reference your old project for this, or you may wish to build this fr
 
 ## STEP 3 - Fetch the User's Followers
 
-- When your component mounts, you will also fetch the user's followers using this endpoint:
+x- When your component mounts, you will also fetch the user's followers using this endpoint:
   https://api.github.com/users/< Your github name >/followers
-- Set that data to state as well, and display the data in your app
+x- Set that data to state as well, and display the data in your app
 
 ## STEP 4 - Style the User Card
 
-- Now it's time to style up your app
-- You are free to choose how you style your app, but make it look as presentable as you can
+x- Now it's time to style up your app
+x- You are free to choose how you style your app, but make it look as presentable as you can
 - Try something new here. Maybe that's a new CSS technique you haven't really practiced yet. Maybe it's using a styling library you haven't tried. Push yourself to get better in this area.
 
 ## STEP 5 - Project Retrospective
