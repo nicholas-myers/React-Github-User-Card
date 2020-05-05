@@ -5,6 +5,7 @@ import "./App.css";
 class App extends Component {
   state = {
     users: [],
+    followers: []
   };
 
   componentDidMount() {
@@ -15,7 +16,21 @@ class App extends Component {
         console.log(res.data);
         this.setState({
           users: [res.data],
+          
         });
+        // console.log(this.state.users)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      axios
+      .get("https://api.github.com/users/nicholas-myers/followers")
+      .then((res) => {
+        console.log(res.data);
+        this.setState({
+          followers: res.data
+        })
+        // console.log(this.state.users)
       })
       .catch((err) => {
         console.log(err);
@@ -33,6 +48,11 @@ class App extends Component {
               <h2>{user.name}</h2>
               <img src={user.avatar_url} />
               <p>{user.bio}</p>
+              <p></p>
+              {this.state.followers.map(follower => (
+              <div className="followers">
+                <h3>{follower.login}</h3>
+              </div>))}
             </div>
           ))}
         </div>
