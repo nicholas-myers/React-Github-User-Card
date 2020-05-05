@@ -5,7 +5,8 @@ import "./App.css";
 class App extends Component {
   state = {
     users: [],
-    followers: []
+    followers: [],
+    display: false
   };
 
   componentDidMount() {
@@ -39,7 +40,9 @@ class App extends Component {
 
   toggleFollowers = (event) => {
     event.preventDefault()
-    
+    this.setState({
+      display: !this.state.display
+    })
   }
 
   render() {
@@ -54,8 +57,8 @@ class App extends Component {
               <h2>{user.name}</h2>
               <img src={user.avatar_url} alt="profile" />
               <p>{user.bio}</p>
-              <button>Followers</button>
-              {this.state.followers.map(follower => (
+              <button onClick={this.toggleFollowers}>Followers</button>
+              {this.state.display && this.state.followers.map(follower => (
               <div key={follower.id} className="followers">
                 <h3>{follower.login}</h3>
               </div>))}
