@@ -18,20 +18,20 @@ Commit your code regularly and meaningfully. This helps both you and your team l
 - [x] Use CRA to create a new React app in this repository
 - [x] Create a new branch: git checkout -b `<firstName-lastName>`.
 - [x] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
-- [ ] Push commits: git push origin `<firstName-lastName>`.
+- [x] Push commits: git push origin `<firstName-lastName>`.
 
 Follow these steps for completing your project.
 
 - [ ] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's Repository). **Please don't merge your own pull request**
 - [ ] Add your team lead as a reviewer on the pull-request
 - [ ] Your team lead will count the project as complete by merging the branch back into master.
-- [ ] Do your magic!
+- [x] Do your magic!
 
 ## Minimum Viable Product
 
-- [ ] Fetch data from the Github API for a Github user
-- [ ] Display the user data on the DOM
-- [ ] Use class components when you need to hold any state or use any lifecycle methods
+- [x] Fetch data from the Github API for a Github user
+- [x] Display the user data on the DOM
+- [x] Use class components when you need to hold any state or use any lifecycle methods
 
 ## Planning your App
 
@@ -43,15 +43,15 @@ When you have those completed, you're ready to start coding!
 
 ## STEP 1 - Fetch the User Data
 
-- When your component mounts, send a GET request to the following URL (replacing the palceholder with your Github name):
+x- When your component mounts, send a GET request to the following URL (replacing the palceholder with your Github name):
   - https://api.github.com/users/<your name>
-- After you fetch your data, set it to state
+x- After you fetch your data, set it to state
 
 ## STEP 2 - Display the User Data
 
-- Pass the data to the component that will be displaying it
-- Build out a user card using the data that the Github API returns to you
-  - You may reference your old project for this, or you may wish to build this from scratch yourself
+x- Pass the data to the component that will be displaying it
+x- Build out a user card using the data that the Github API returns to you
+x- You may reference your old project for this, or you may wish to build this from scratch yourself
 
 ## STEP 3 - Fetch the User's Followers
 

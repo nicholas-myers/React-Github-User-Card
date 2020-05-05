@@ -30,8 +30,9 @@ class App extends Component {
         <div className="users">
           {this.state.users.map((user) => (
             <div key={user.id} className="user">
-              <h2>{user.login}</h2>
+              <h2>{user.name}</h2>
               <img src={user.avatar_url} />
+              <p>{user.bio}</p>
             </div>
           ))}
         </div>
