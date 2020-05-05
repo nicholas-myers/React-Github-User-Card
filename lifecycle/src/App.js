@@ -6,7 +6,8 @@ class App extends Component {
   state = {
     users: [],
     followers: [],
-    display: false
+    display: false,
+    findUser: ""
   };
 
   componentDidMount() {
@@ -38,6 +39,41 @@ class App extends Component {
       });
   }
 
+  captureUser = e => {
+    this.setState({
+      findUser: e.target.value
+    })
+    // console.log(this.state.findUser)
+  }
+
+  addUser = e => {
+    e.preventDefault()
+    axios
+      .get(`https://api.github.com/users/${this.state.findUser}`)
+      .then((res) => {
+        // console.log(res.data);
+        this.setState({
+          users: [...this.state.users, res.data]
+        });
+        // console.log(this.state.users)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      // axios
+      // .get("https://api.github.com/users/nicholas-myers/followers")
+      // .then((res) => {
+      //   // console.log(res.data);
+      //   this.setState({
+      //     followers: res.data
+      //   })
+      //   // console.log(this.state.followers)
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // });
+  }
+
   toggleFollowers = (event) => {
     event.preventDefault()
     this.setState({
@@ -46,11 +82,21 @@ class App extends Component {
   }
 
   render() {
-    console.log("app is rendering");
+    // console.log("app is rendering");
     // debugger
     return (
       <div className="App">
         <h1>Git User Cards</h1>
+        <form onSubmit={this.addUser} className="search">
+          <label>Search Users:</label>
+          <input 
+          name="findUser"
+          type="text"
+          value={this.state.findUser}
+          onChange={this.captureUser}
+          />
+          <button>Add User</button>
+        </form>
         <div className="users">
           {this.state.users.map((user) => (
             <div key={user.id} className="user">
