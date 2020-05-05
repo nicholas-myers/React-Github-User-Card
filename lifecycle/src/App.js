@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.css";
 
 import UserSearch from "./components/UserSearch"
+import UserCard from "./components/UserCard"
 
 class App extends Component {
   state = {
@@ -42,6 +43,7 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.users !== prevState.users) {
+      console.log("I updated")
       this.setState({
         display: false,
         findUser: ""
@@ -91,7 +93,7 @@ class App extends Component {
   };
 
   render() {
-    console.log("app is rendering");
+    // console.log("app is rendering");
     // debugger
     return (
       <div className="App">
@@ -101,22 +103,13 @@ class App extends Component {
         value={this.state.findUser} 
         captureUser={this.captureUser}
         />
-        <div className="users">
           {this.state.users.map((user) => (
-            <div key={user.id} className="user">
-              <h2>{user.name}</h2>
-              <img src={user.avatar_url} alt="profile" />
-              <p>{user.bio}</p>
-              <button onClick={this.toggleFollowers}>Followers</button>
-              {this.state.display &&
-                this.state.followers.map((follower) => (
-                  <div key={follower.id} className="followers">
-                    <h3>{follower.login}</h3>
-                  </div>
-                ))}
-            </div>
+            <UserCard 
+            user={user} 
+            display={this.state.display} 
+            toggleFollowers={this.toggleFollowers} 
+            followers={this.state.followers}/>
           ))}
-        </div>
       </div>
     );
   }
