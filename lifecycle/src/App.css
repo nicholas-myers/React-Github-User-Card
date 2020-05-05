@@ -24,11 +24,20 @@ h1 {
 }
 
 form {
+  width: 100%;
   margin: 3% 0;
+}
+
+input {
+  margin: 0 3%;
 }
 
 .users {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
 }
 
 .user {

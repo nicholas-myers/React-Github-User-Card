@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./App.css";
 
+import UserSearch from "./components/UserSearch"
+
 class App extends Component {
   state = {
     users: [],
     followers: [],
     display: false,
-    findUser: ""
+    findUser: "",
   };
 
   componentDidMount() {
@@ -18,20 +20,19 @@ class App extends Component {
         // console.log(res.data);
         this.setState({
           users: [res.data],
-          
         });
         // console.log(this.state.users)
       })
       .catch((err) => {
         console.log(err);
       });
-      axios
+    axios
       .get("https://api.github.com/users/nicholas-myers/followers")
       .then((res) => {
         // console.log(res.data);
         this.setState({
-          followers: res.data
-        })
+          followers: res.data,
+        });
         // console.log(this.state.followers)
       })
       .catch((err) => {
@@ -39,47 +40,55 @@ class App extends Component {
       });
   }
 
-  captureUser = e => {
-    this.setState({
-      findUser: e.target.value
-    })
-    // console.log(this.state.findUser)
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.users !== prevState.users) {
+      this.setState({
+        display: false,
+        findUser: ""
+      })
+    }
   }
+  captureUser = (e) => {
+    this.setState({
+      findUser: e.target.value,
+    });
+    // console.log(this.state.findUser)
+  };
 
-  addUser = e => {
-    e.preventDefault()
+  addUser = (e) => {
+    e.preventDefault();
     axios
       .get(`https://api.github.com/users/${this.state.findUser}`)
       .then((res) => {
         // console.log(res.data);
         this.setState({
-          users: [...this.state.users, res.data]
+          users: [res.data],
         });
         // console.log(this.state.users)
       })
       .catch((err) => {
         console.log(err);
       });
-      // axios
-      // .get("https://api.github.com/users/nicholas-myers/followers")
-      // .then((res) => {
-      //   // console.log(res.data);
-      //   this.setState({
-      //     followers: res.data
-      //   })
-      //   // console.log(this.state.followers)
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // });
-  }
+      axios
+      .get(`https://api.github.com/users/${this.state.findUser}/followers`)
+      .then((res) => {
+        // console.log(res.data);
+        this.setState({
+          followers: res.data,
+        });
+        // console.log(this.state.users)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   toggleFollowers = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     this.setState({
-      display: !this.state.display
-    })
-  }
+      display: !this.state.display,
+    });
+  };
 
   render() {
     console.log("app is rendering");
@@ -87,16 +96,11 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Git User Cards</h1>
-        <form onSubmit={this.addUser} className="search">
-          <label>Search Users:</label>
-          <input 
-          name="findUser"
-          type="text"
-          value={this.state.findUser}
-          onChange={this.captureUser}
-          />
-          <button>Add User</button>
-        </form>
+        <UserSearch 
+        addUser={this.addUser} 
+        value={this.state.findUser} 
+        captureUser={this.captureUser}
+        />
         <div className="users">
           {this.state.users.map((user) => (
             <div key={user.id} className="user">
@@ -104,10 +108,12 @@ class App extends Component {
               <img src={user.avatar_url} alt="profile" />
               <p>{user.bio}</p>
               <button onClick={this.toggleFollowers}>Followers</button>
-              {this.state.display && this.state.followers.map(follower => (
-              <div key={follower.id} className="followers">
-                <h3>{follower.login}</h3>
-              </div>))}
+              {this.state.display &&
+                this.state.followers.map((follower) => (
+                  <div key={follower.id} className="followers">
+                    <h3>{follower.login}</h3>
+                  </div>
+                ))}
             </div>
           ))}
         </div>
