@@ -1,9 +1,22 @@
 import React, { Component } from "react";
+import styled from "styled-components";
+
+const SearchBar = styled.form`
+
+
+  width: 100%;
+  margin: 3% 0;
+  border: 1px solid black;
+  padding: 1%;
+  background-color: lightblue;
+
+
+`
 
 class UserSearch extends Component {
   render() {
     return (
-      <form onSubmit={this.props.addUser} className="search">
+      <SearchBar onSubmit={this.props.addUser} className="search">
         <label>Search Users:</label>
         <input
           name="findUser"
@@ -12,7 +25,7 @@ class UserSearch extends Component {
           onChange={this.props.captureUser}
         />
         <button>Add User</button>
-      </form>
+      </SearchBar>
     );
   }
 }
