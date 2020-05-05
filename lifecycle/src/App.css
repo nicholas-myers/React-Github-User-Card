@@ -27,8 +27,13 @@ form {
   margin: 3% 0;
 }
 
+.users {
+  width: 100%;
+}
+
 .user {
-  /* width: 50%; */
+  width: 50%;
+  margin: 3% 0;
   border: 1px solid black;
   padding: 2rem;
   border-radius: 1rem;

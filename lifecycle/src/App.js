@@ -82,7 +82,7 @@ class App extends Component {
   }
 
   render() {
-    // console.log("app is rendering");
+    console.log("app is rendering");
     // debugger
     return (
       <div className="App">
